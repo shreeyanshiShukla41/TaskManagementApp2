@@ -1,0 +1,48 @@
+<%- layout("/layouts/boilerplate.ejs") %>
+<div id="wrapperSideAndShow">
+  <%- include("includes/sidebar.ejs") %>
+
+  <div id="showtasks" class="glass">
+    <form action="/api/auth/login" method="get">
+      <button>Logout</button>
+    </form>
+
+    <form action="/api/tasks/setTask/<%= userId %>" method="get">
+      <button>Add a new task</button>
+    </form>
+    <div id="task-table-div">
+      <table id="task-table">
+        <tr>
+          <th>Task</th>
+          <th>Due Date</th>
+          <th colspan="2">Description of the task</th>
+          <th>Nature of the task</th>
+          <th>Status</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <% tasks.forEach(function(task) { %>
+        <tr>
+          <td><%= task.task %></td>
+          <td style="font-size: 10px;">
+            <%= task.DOE?task.DOE.toISOString().split('T')[0]:"No due date" %>
+          </td>
+          <td colspan="2"><%= task.description %></td>
+          <td><%= task.natureOfTask %></td>
+          <td><%= task.status %></td>
+          <td><a href="/api/tasks/updateTask/<%= task._id %>">Edit Task</a></td>
+          <td>
+            <form
+              action="/api/tasks/deleteTask/<%= task._id %>?_method=DELETE"
+              method="post"
+            >
+              <button>Delete task</button>
+            </form>
+          </td>
+        </tr>
+        <% }); %>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include("taskStatus.ejs") %>

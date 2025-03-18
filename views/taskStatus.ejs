@@ -1,0 +1,34 @@
+<input type="hidden" value="<%= pending %>" id="pending" />
+<input type="hidden" value="<%= ongoing %>" id="ongoing" />
+<input type="hidden" value="<%= completed %>" id="completed" />
+
+
+<div style="width: 400px; height: 400px">
+  <canvas id="taskChart" width="100" height="200"></canvas>
+</div>
+<script>
+  const ctx = document.getElementById("taskChart").getContext("2d");
+
+  // Sample task data
+  const taskStatus = ["Pending", "In Progress", "Completed"];
+  const pendingTasks = document.getElementById("pending").value;
+  const ongoingTasks = document.getElementById("ongoing").value;
+  const inprogressTasks = document.getElementById("completed").value;
+
+  console.log(pendingTasks, ongoingTasks, inprogressTasks);
+  const taskCount = [pendingTasks, ongoingTasks, inprogressTasks]; // Example data
+
+  new Chart(ctx, {
+    type: "pie", // Change to 'bar', 'line', etc.
+    data: {
+      labels: taskStatus,
+      datasets: [
+        {
+          label: "Tasks",
+          data: taskCount,
+          backgroundColor: ["red", "orange", "green"],
+        },
+      ],
+    },
+  });
+</script>

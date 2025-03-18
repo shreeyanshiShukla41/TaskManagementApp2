@@ -1,0 +1,43 @@
+<%- layout("/layouts/boilerplate.ejs") %>
+
+<div class="task-form">
+<form method="post" class="form-control">
+  <input type="hidden" name="userId" value="<%= userId %>" />
+  <div>
+    <label>Task:</label>
+    <input type="text" name="task" />
+  </div>
+  <div>
+    <label>Description:</label>
+    <textarea name="description" cols="80" rows="4"></textarea>
+  </div>
+  <div>
+    <label>Date of Start:</label>
+    <input type="date" name="DOS" />
+  </div>
+  <div>
+    <label>Due Date:</label>
+    <input type="date" name="DOE" />
+  </div>
+  <div>
+    <label>Status:</label>
+    <select name="status" id="status">
+      <option id="pending" value="pending">Pending</option>
+      <option value="completed">Completed</option>
+      <option value="inprogress">Inprogress</option>
+    </select>
+  </div>
+  <div>
+    <label>Nature of Task:</label>
+    <!-- <input type="text" name="natureOfTask"/> -->
+
+    <label for="natureOfTask">Important</label>
+    <input type="radio" name="natureOfTask" id="Important" value="Important" />
+    <label for="natureOfTask">Urgent</label>
+    <input type="radio" name="natureOfTask" id="Urgent" value="Urgent" />
+  </div>
+  <div>
+    <button>Add Task</button>
+  </div>
+</form>
+</div>

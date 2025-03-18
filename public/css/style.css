@@ -1,0 +1,220 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:"wdth" 100;
+}
+
+/* #wrapper{
+  /* height: 448px;
+  width: 400px;
+  color: white;
+  background-color: #66a3ff;
+
+  background-image: repeating-linear-gradient(
+      transparent,
+      transparent 50px,
+      purple 50px,
+      purple 53px,
+      transparent 53px,
+      transparent 63px,
+      purple 63px,
+      purple 66px,
+      transparent 66px,
+      transparent 116px,
+      rgba(0, 0, 0, 0.5) 116px,
+      rgba(0, 0, 0, 0.5) 166px,
+      rgba(255, 255, 255, 0.2) 166px,
+      rgba(255, 255, 255, 0.2) 169px,
+      rgba(0, 0, 0, 0.5) 169px,
+      rgba(0, 0, 0, 0.5) 179px,
+      rgba(255, 255, 255, 0.2) 179px,
+      rgba(255, 255, 255, 0.2) 182px,
+      rgba(0, 0, 0, 0.5) 182px,
+      rgba(0, 0, 0, 0.5) 232px,
+      transparent 232px
+    ),
+    repeating-linear-gradient(
+      270deg,
+      transparent,
+      transparent 50px,
+      purple 50px,
+      purple 53px,
+      transparent 53px,
+      transparent 63px,
+      purple 63px,
+      purple 66px,
+      transparent 66px,
+      transparent 116px,
+      rgba(0, 0, 0, 0.5) 116px,
+      rgba(0, 0, 0, 0.5) 166px,
+      rgba(255, 255, 255, 0.2) 166px,
+      rgba(255, 255, 255, 0.2) 169px,
+      rgba(0, 0, 0, 0.5) 169px,
+      rgba(0, 0, 0, 0.5) 179px,
+      rgba(255, 255, 255, 0.2) 179px,
+      rgba(255, 255, 255, 0.2) 182px,
+      rgba(0, 0, 0, 0.5) 182px,
+      rgba(0, 0, 0, 0.5) 232px,
+      transparent 232px
+    );
+} */
+
+#wrapper {
+  display: flex;
+  border: 2px solid red;
+  /* background-color: aquamarine; */
+}
+
+#navbar {
+  position: fixed;
+  background-color: rgba(103, 103, 124, 0.56);
+  backdrop-filter: blur(2px);
+  width: 100%;
+}
+#navbar ul {
+  display: flex;
+  gap: 20px;
+  list-style-type: none;
+}
+
+#navbar ul li {
+  margin: 20px;
+  background-color: azure;
+  padding: 10px;
+}
+
+#sidebar ul li{
+   margin:20px;
+   list-style: none;
+   /* background-color: blueviolet; */
+   padding: 10px;
+   text-align: center;
+}
+
+#register{
+  margin: 200px auto;
+}
+
+#login{
+  padding-top:5px;
+  /* border: 2px solid black ; */
+  border-radius: 30px;
+  width: 35%;
+  height: 500px;
+  margin: 150px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: pink;
+}
+
+.form{
+  /* border: 2px solid brown; */
+  padding-left: 5%;
+  margin: 10px;
+  width: 80%;
+  /* height: 250px; */
+  align-items: center;
+}
+
+.form input{
+  background-color: palevioletred;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  border-radius: 50px;
+  font-size: 1rem;
+  /* height: 30px; */
+  padding:3% 6%;
+  width: 80%;
+  margin: 20px;
+}
+
+.form #button{
+  width: 30%;
+  margin-left: auto;
+  background-color: rgb(217, 147, 217);
+}
+
+#wrapperSideAndShow{
+  display: flex;
+  height: 100vh;
+  width: 70%;
+}
+
+
+#sidebar{
+  background-color: blanchedalmond;
+  width: 20%;
+}
+
+#showtasks{
+  padding: 30px;
+}
+
+#task-table-div{
+  background-image: linear-gradient( blue,pink);
+  padding: 20px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+#task-table{
+  width: 100%;
+  /* border-collapse: collapse; */
+  /* background-color: rgb(164, 184, 184); */
+}
+
+#task-table tr:nth-child(even){
+   padding: 30px;
+}
+
+#task-table tr:nth-child(odd){
+  padding:30px;
+}
+
+#task-table tr th{
+  border: 2px solid white;
+  font-size: 1rem;
+}
+
+#task-table tr td{
+  margin: 10px;
+  padding: 5px;
+  font-size: 14px;
+  text-align: center;
+  text-transform: capitalize;
+  border: 2px solid white;
+  /* background-color: brown; */
+}
+
+.task-form{
+  height: 600px;
+  width: 40%;
+  background-color: aqua;
+}
+
+.task-form form{
+  display: flex;
+  margin: 30px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-form div{
+  width: 80%;
+  display: flex;
+  margin: 10px;
+  align-items: center;
+  /* justify-content: space-evenly; */
+}
+.task-form div input{
+  margin: 20px;
+  width: 200px;
+}

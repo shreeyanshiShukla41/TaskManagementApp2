@@ -1,0 +1,51 @@
+<%- layout("/layouts/boilerplate.ejs") %>
+<div class="task-form">
+  <form method="post" action="/api/tasks/updateTask/<%= taskId %>?_method=PUT">
+    <div>
+      <label>Task:</label>
+      <input type="text" name="task" value="<%= task.task %>" />
+    </div>
+    <div>
+      <label>Description:</label>
+      <textarea name="description"><%= task.description %></textarea>
+    </div>
+    <div>
+      <label>Date of Start:</label>
+      <input type="text" name="DOS" value="<%=
+      task.DOS?task.DOS.toISOString().split('T')[0]:"No start date" %>" /><span
+      ></span>
+    </div>
+    <div>
+      <label>Due Date:</label>
+      <input type="text" name="DOE" value="<%=
+      task.DOE?task.DOE.toISOString().split('T')[0]:"No due date" %>"/><span
+      ></span>
+    </div>
+    <div>
+      <label>Status:</label>
+      <select name="status" id="status">
+        <option id="pending" value="pending">Pending</option>
+        <option value="completed">Completed</option>
+        <option value="inprogress">Inprogress</option>
+      </select>
+      <%= task.status %>
+    </div>
+    <div>
+      <label>Nature of Task:</label>
+
+      <input
+        type="radio"
+        name="natureOfTask"
+        id="Important"
+        value="Important"
+      /><label for="natureOfTask"><b>Important</b></label>
+
+      <input type="radio" name="natureOfTask" id="Urgent" value="Urgent" />
+      <label for="natureOfTask"><b>Urgent</b></label>
+      <span><%= task.natureOfTask %></span>
+    </div>
+    <div>
+      <button>Edit Task</button>
+    </div>
+  </form>
+</div>
