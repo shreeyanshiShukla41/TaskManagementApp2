@@ -1,4 +1,6 @@
-const dotenv = require("dotenv").config();
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config();
+}
 
 const express = require("express");
 const app = express();
@@ -16,10 +18,13 @@ const dbUrl = process.env.ATLAS_URL;
 
 main()
   .then((r) => console.log(r))
-  .catch((err) => console.log(err));
+  .catch((e) => console.log(e));
 
 async function main() {
-  await mongoose.connect(dbUrl);
+  await mongoose.connect(dbUrl,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 }
 
 // app.use((req, res, next) => {
