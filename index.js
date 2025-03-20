@@ -14,7 +14,7 @@ const ejsMate = require("ejs-mate");
 const port = 8000 || process.env.PORT;
 const { env } = require("process");
 
-const dbUrl = process.env.ATLAS_URL;
+const dbUrl ="mongodb+srv://codingnew50:AgiSGSKGjFbothuy@cluster0.ovma5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 main()
   .then((r) => console.log(r))
