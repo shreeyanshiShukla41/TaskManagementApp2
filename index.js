@@ -1,6 +1,4 @@
-if(process.env.NODE_ENV!="production"){
-  const dotenv=require("dotenv").config()
-}
+const dotenv = require("dotenv").config();
 
 const express = require("express");
 const app = express();
@@ -11,11 +9,10 @@ const authRoutes = require("./routes/auth");
 const taskRoutes = require("./routes/tasks");
 const middleware = require("./middleware");
 const ejsMate = require("ejs-mate");
-const port = 8000||process.env.PORT;
+const port = 8000 || process.env.PORT;
 const { env } = require("process");
 
-
-const dbUrl=process.env.ATLAS_URL;
+const dbUrl = process.env.ATLAS_URL;
 
 main()
   .then((r) => console.log(r))
