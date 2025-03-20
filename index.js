@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV!="production"){
+  const dotenv=require("dotenv").config()
+}
+
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -7,16 +11,18 @@ const authRoutes = require("./routes/auth");
 const taskRoutes = require("./routes/tasks");
 const middleware = require("./middleware");
 const ejsMate = require("ejs-mate");
-const port = 8000;
+const port = 8000||process.env.PORT;
+const { env } = require("process");
+
+
+const dbUrl=process.env.ATLAS_URL;
 
 main()
   .then((r) => console.log(r))
   .catch((err) => console.log(err));
+
 async function main() {
-  await mongoose.connect("mongodb://localhost:27017/authDemo", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  await mongoose.connect(dbUrl);
 }
 
 // app.use((req, res, next) => {
