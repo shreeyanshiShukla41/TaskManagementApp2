@@ -20,14 +20,17 @@ const taskSchema = new mongoose.Schema({
     // required: true,
     default: Date.now(),
   },
-  natureOfTask:{
-    type:String,
-    required:true
+  completedOn: {
+    type: Date,
+  },
+  natureOfTask: {
+    type: String,
+    required: true,
   },
   status: {
     type: String,
-    enum:["pending","completed","inprogress"],
-    default:"pending",
+    enum: ["pending", "completed", "inprogress"],
+    default: "pending",
     required: true,
   },
   userId: {

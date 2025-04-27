@@ -1,3 +1,35 @@
 <%- layout("/layouts/boilerplate.ejs") %>
-<%- include("includes/navbar.ejs") %>
-<h1>Home page</h1>
+<div class="container-fluid p-4" id="home">
+  <div id="home-outer">
+    <%- include("includes/navbar.ejs") %>
+    <div class="row p-3" id="home-wrap">
+      <div class="col-7">
+        <h1 class="" style="font-size: 3rem">The Task Management App</h1>
+        <p>
+          <span id="stay-span" style="font-size: 3rem">Stay</span>&nbsp;
+          <span id="rspan" class="fade-in"></span>
+        </p>
+        <div>
+          <h3>Features</h3>
+          <ul>
+            <li>User Friendly UI Using BootStrap, CSS3</li>
+            <li>Task Management – Create, edit, delete tasks.</li>
+            <li>Check On Pending, Completed and Ongoing Tasks</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-5" style="text-align: center">
+        <img src="/images/homepage.svg" id="checklistimage" />
+        <p>
+          Image taken from
+          <a
+            href="https://undraw.co/illustrations"
+            style="text-decoration: none"
+            >unDraw</a
+          >
+        </p>
+      </div>
+    </div>
+    <div style="text-align: center;"><p >Built with ❤️ by Shreeyanshi</p></div>
+  </div>
+</div>

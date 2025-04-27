@@ -1,10 +1,11 @@
-<input type="hidden" value="<%= pending %>" id="pending" />
-<input type="hidden" value="<%= ongoing %>" id="ongoing" />
-<input type="hidden" value="<%= completed %>" id="completed" />
+<div style="padding: 20px;">
+  <input type="hidden" value="<%= pending %>" id="pending" />
+  <input type="hidden" value="<%= ongoing %>" id="ongoing" />
+  <input type="hidden" value="<%= completed %>" id="completed" />
 
-
-<div style="width: 400px; height: 400px">
-  <canvas id="taskChart" width="100" height="200"></canvas>
+  <div style="width: 200px; height: 200px">
+    <canvas id="taskChart" width="100" height="200"></canvas>
+  </div>
 </div>
 <script>
   const ctx = document.getElementById("taskChart").getContext("2d");

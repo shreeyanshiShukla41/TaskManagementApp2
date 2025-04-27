@@ -1,11 +1,47 @@
-<%- layout("/layouts/boilerplate.ejs") %>
-<%- include("includes/navbar.ejs") %>
-<div id="register">
-<form action="" method="post" class="form">
-  <input type="text" name="name" placeholder="Name" />
-  <input type="email" name="email" placeholder="Email" />
-  <input type="password" name="password" placeholder="Password" />
-  <input type="submit" value="Register" />
-</form>
-<div>If already registered <a href="/api/auth/login">login</a></div>
+<div id="wrapper">
+  <%- layout("/layouts/boilerplate.ejs") %>
+  <div class="back"><a href="/">Home</a></div>
+  <div id="register" class="form-div" style="padding: 40px;">
+    <h3>Registration Form</h3>
+    <form class="row g-3 needs-validation" method="post" novalidate>
+      <div class="col-md-12">
+        <label for="name" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div class="col-md-12">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div class="col-md-12">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          required
+        />
+        <div class="invalid-feedback">Please provide a valid city.</div>
+      </div>
+
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit">Submit Form</button>
+      </div>
+    </form>
+    <div>If already registered, <a href="/api/auth/login">login</a></div>
+  </div>
 </div>

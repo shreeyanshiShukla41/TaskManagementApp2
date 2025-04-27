@@ -1,0 +1,55 @@
+<div style="display: flex; flex-direction: column;background-color: aqua;width: 100%;">
+  <h2>Completed Tasks</h2>
+  <div class="accordion" >
+    <% completedTasks.forEach((task, index) => { %>
+    <div
+      class="accordion-item"
+      onclick="handleAccordionContent('<%=index%>')"
+      id="item-<%= index %>"
+    >
+      <div class="accordion-header">
+        <p><%= index %> &nbsp; <span><%= task.task %></span></p>
+        <form
+          action="/api/tasks/deleteTask/<%= task._id %>?_method=DELETE"
+          method="post"
+        >
+          <button id="deletebtn"><i class="fa-solid fa-trash"></i></button>
+        </form>
+      </div>
+      <div>
+        <div class="accordion-content" id="content-<%= index %>">
+          <strong>Task Description:</strong> <%= task.description %><br />
+          <strong>Task Due date:</strong> <%= task.DOE.toDateString() %><br />
+          <strong>Task is</strong> <%= task.natureOfTask %><br />
+          <strong>Task status:</strong><%= task.status %><br />
+          <a
+            href="/api/tasks/updateTask/<%= task._id %>"
+            style="text-decoration: none"
+            >Edit Task</a
+          >
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+</div>
+
+<script>
+  const sidebarCrossBtn = document.getElementById("sidebar-cross");
+  sidebarCrossBtn.addEventListener("click", () => {
+    const divp = document.getElementById("sidebar");
+    if (divp.classList.contains("open")) {
+      divp.classList.remove("open");
+      divp.classList.add("close");
+    } else {
+      divp.classList.remove("close");
+      divp.classList.add("open");
+    }
+  });
+
+  function handleAccordionContent(index) {
+    const item = document.getElementById(`item-${index}`);
+    console.log(item);
+    item.classList.toggle("active");
+  }
+</script>

@@ -1,48 +1,95 @@
 <%- layout("/layouts/boilerplate.ejs") %>
 <div id="wrapperSideAndShow">
-  <%- include("includes/sidebar.ejs") %>
-
-  <div id="showtasks" class="glass">
-    <form action="/api/auth/login" method="get">
-      <button>Logout</button>
-    </form>
-
-    <form action="/api/tasks/setTask/<%= userId %>" method="get">
-      <button>Add a new task</button>
-    </form>
-    <div id="task-table-div">
-      <table id="task-table">
-        <tr>
-          <th>Task</th>
-          <th>Due Date</th>
-          <th colspan="2">Description of the task</th>
-          <th>Nature of the task</th>
-          <th>Status</th>
-          <th></th>
-          <th></th>
-        </tr>
-        <% tasks.forEach(function(task) { %>
-        <tr>
-          <td><%= task.task %></td>
-          <td style="font-size: 10px;">
-            <%= task.DOE?task.DOE.toISOString().split('T')[0]:"No due date" %>
-          </td>
-          <td colspan="2"><%= task.description %></td>
-          <td><%= task.natureOfTask %></td>
-          <td><%= task.status %></td>
-          <td><a href="/api/tasks/updateTask/<%= task._id %>">Edit Task</a></td>
-          <td>
-            <form
-              action="/api/tasks/deleteTask/<%= task._id %>?_method=DELETE"
-              method="post"
-            >
-              <button>Delete task</button>
-            </form>
-          </td>
-        </tr>
-        <% }); %>
-      </table>
+  <div class="sidebar-wrap">
+    <div id="sidebar" class="close">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/api/auth/register">Register</a></li>
+        <li><a href="/api/auth/login">Login</a></li>
+        <li><a href="/api/tasks/<%= userId %>">All tasks</a></li>
+        <li>Dashboard</li>
+      </ul>
     </div>
   </div>
+  <div id="showtasks">
+    <button id="sidebar-cross"></button>
+    <div id="insideShow" style="background-color: rgb(195, 195, 67)">
+      <h2>All Tasks</h2>
+      <div style="display: flex; gap: 4px">
+        <form action="/api/auth/login" method="get">
+          <button class="bttn">Logout</button>
+        </form>
+        <form action="/api/tasks/setTask/<%= userId %>" method="get">
+          <button class="bttn">Add a new task</button>
+        </form>
+      </div>
+      <div class="accordion" id="taskAccordion">
+        <% tasks.forEach((task, index) => { %>
+        <div
+          class="accordion-item"
+          onclick="handleAccordionContent('<%=index%>')"
+          id="item-<%= index %>"
+        >
+          <div class="accordion-header">
+            <p><%= index %> &nbsp; <span><%= task.task %></span></p>
+            <div style="display: flex; gap: 10px">
+              <form method="post" action="/api/tasks/<%= task._id %>/doneTask">
+                <button style="border: none;">
+                  <i
+                    class="fa-solid fa-circle-check"
+                    style="font-size: 20px"
+                  ></i>
+                </button>
+              </form>
+              <form
+                action="/api/tasks/deleteTask/<%= task._id %>?_method=DELETE"
+                method="post"
+              >
+                <button id="deletebtn">
+                  <i class="fa-solid fa-trash" style="font-size: 20px"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+          <div>
+            <div class="accordion-content" id="content-<%= index %>">
+              <strong>Task Description:</strong> <%= task.description %><br />
+              <strong>Task Due date:</strong> <%= task.DOE.toDateString() %><br />
+              <strong>Task is</strong> <%= task.natureOfTask %><br />
+              <strong>Task status:</strong><%= task.status %><br />
+              <a
+                href="/api/tasks/updateTask/<%= task._id %>"
+                style="text-decoration: none"
+                >Edit Task</a
+              >
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center">
+      <%- include("taskStatus.ejs") %> <%- include("completed.ejs") %>
+    </div>
+  </div>
+
+  <script>
+    const sidebarCrossBtn = document.getElementById("sidebar-cross");
+    sidebarCrossBtn.addEventListener("click", () => {
+      const divp = document.getElementById("sidebar");
+      if (divp.classList.contains("open")) {
+        divp.classList.remove("open");
+        divp.classList.add("close");
+      } else {
+        divp.classList.remove("close");
+        divp.classList.add("open");
+      }
+    });
+
+    function handleAccordionContent(index) {
+      const item = document.getElementById(`item-${index}`);
+      console.log(item);
+      item.classList.toggle("active");
+    }
+  </script>
 </div>
-<%- include("taskStatus.ejs") %>

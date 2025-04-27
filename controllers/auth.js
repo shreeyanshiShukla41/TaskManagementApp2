@@ -31,9 +31,10 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
+    console.log(req.body);
     const { password, email } = req.body;
     if (!email || !password) {
-      return res.status(400).send("fill required details");
+      return res.status(400);
     } else {
       const alreadyExists = await User.findOne({ email });
       if (!alreadyExists) {
@@ -54,12 +55,10 @@ const login = async (req, res, next) => {
             userId: alreadyExists._id,
             email: alreadyExists.email,
           };
-          const JWT_SECRET_KEY =
-            process.env.JWT_SECRET_KEY || "THIS_IS_A_JWT_SECRET_KEY";
 
           const token = jwt.sign(
             payload,
-            JWT_SECRET_KEY,
+            "This is a new key",
             { expiresIn: 24 * 60 * 60 },
             async (err, token) => {
               await User.updateOne(
@@ -67,12 +66,7 @@ const login = async (req, res, next) => {
                 { $set: { token } }
               );
               alreadyExists.save();
-              // return res.status(200).json({
-              //   name: alreadyExists.name,
-              //   email: alreadyExists.email,
-              //   token: token,
-              // });
-              return res.redirect(`/api/tasks/${alreadyExists._id}`)
+              return res.redirect(`/api/tasks/${alreadyExists._id}`);
             }
           );
         }
@@ -110,7 +104,5 @@ const login = async (req, res, next) => {
 //     res.status(500).json({ error: "Login failed" });
 //   }
 // };
-
-
 
 module.exports = { register, login };

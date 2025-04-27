@@ -1,51 +1,66 @@
 <%- layout("/layouts/boilerplate.ejs") %>
-<div class="task-form">
-  <form method="post" action="/api/tasks/updateTask/<%= taskId %>?_method=PUT">
-    <div>
-      <label>Task:</label>
-      <input type="text" name="task" value="<%= task.task %>" />
-    </div>
-    <div>
-      <label>Description:</label>
-      <textarea name="description"><%= task.description %></textarea>
-    </div>
-    <div>
-      <label>Date of Start:</label>
-      <input type="text" name="DOS" value="<%=
-      task.DOS?task.DOS.toISOString().split('T')[0]:"No start date" %>" /><span
-      ></span>
-    </div>
-    <div>
-      <label>Due Date:</label>
-      <input type="text" name="DOE" value="<%=
-      task.DOE?task.DOE.toISOString().split('T')[0]:"No due date" %>"/><span
-      ></span>
-    </div>
-    <div>
-      <label>Status:</label>
-      <select name="status" id="status">
-        <option id="pending" value="pending">Pending</option>
-        <option value="completed">Completed</option>
-        <option value="inprogress">Inprogress</option>
-      </select>
-      <%= task.status %>
-    </div>
-    <div>
-      <label>Nature of Task:</label>
 
-      <input
-        type="radio"
-        name="natureOfTask"
-        id="Important"
-        value="Important"
-      /><label for="natureOfTask"><b>Important</b></label>
+<div id="wrapper">
+  <div class="back"><a href="/">Back</a></div>
+  <div class="form-div">
+    <h2>Edit Task</h2>
+    <form
+      method="post"
+      action="/api/tasks/updateTask/<%= taskId %>?_method=PUT"
+    >
+      <div>
+        <label class="form-label">Task:</label>
+        <input
+          type="text"
+          name="task"
+          value="<%= task.task %>"
+          class="form-control"
+        />
+      </div>
+      <div>
+        <label class="form-label">Description:</label>
+        <textarea name="description" class="form-control">
+<%= task.description %></textarea
+        >
+      </div>
+      <div>
+        <label class="form-label">Date of Start:</label>
+        <input class="form-control" type="text" name="DOS" value="<%=
+        task.DOS?task.DOS.toISOString().split('T')[0]:"No start date" %>"
+        /><span></span>
+      </div>
+      <div>
+        <label class="form-label">Due Date:</label>
+        <input class="form-control" type="text" name="DOE" value="<%=
+        task.DOE?task.DOE.toISOString().split('T')[0]:"No due date" %>"/><span
+        ></span>
+      </div>
+      <div>
+        <label class="form-label">Status:</label>
+        <select name="status" id="status" class="form-control">
+          <option id="pending" value="pending">Pending</option>
+          <option value="completed">Completed</option>
+          <option value="inprogress">Inprogress</option>
+        </select>
+        <%= task.status %>
+      </div>
+      <div>
+        <label class="form-label">Nature of Task:</label>
 
-      <input type="radio" name="natureOfTask" id="Urgent" value="Urgent" />
-      <label for="natureOfTask"><b>Urgent</b></label>
-      <span><%= task.natureOfTask %></span>
-    </div>
-    <div>
-      <button>Edit Task</button>
-    </div>
-  </form>
+        <input
+          type="radio"
+          name="natureOfTask"
+          id="Important"
+          value="Important"
+        /><label for="natureOfTask" class="form-label"><b>Important</b></label>
+
+        <input type="radio" name="natureOfTask" id="Urgent" value="Urgent" />
+        <label class="form-label" for="natureOfTask"><b>Urgent</b></label>
+        <span><%= task.natureOfTask %></span>
+      </div>
+      <div style="display: flex; justify-content: center">
+        <button class="btn btn-primary">Submit Changes</button>
+      </div>
+    </form>
+  </div>
 </div>

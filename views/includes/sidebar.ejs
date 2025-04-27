@@ -1,15 +1,14 @@
 <%- layout("/layouts/boilerplate.ejs") %>
-<!-- <button onclick="disappear()">cross</button> -->
-<div id="sidebar">
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/api/auth/regitser">Register</a></li>
-    <li><a href="/api/auth/login">Login</a></li>
-    <li>Completed</li>
-    <li>All tasks</li>
-    <li>Important</li>
-    <li>Dashboard</li>
-  </ul>
+<div class="sidebar-wrap">
+  <div id="sidebar" class="close">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/api/auth/register">Register</a></li>
+      <li><a href="/api/auth/login">Login</a></li>
+      <li><a href="/api/tasks/<%= userId %>">All tasks</a></li>
+      <li>Important</li>
+      <li>Dashboard</li>
+    </ul>
+  </div>
 </div>
-
 

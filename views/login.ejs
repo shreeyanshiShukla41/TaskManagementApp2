@@ -1,11 +1,36 @@
-<%- layout("/layouts/boilerplate.ejs") %>
-<%- include("includes/navbar.ejs") %>
-
-<div id="login">
-<form action="" method="post" class="form">
-  <input type="email" name="email" placeholder="Email" /><br>
-  <input type="password" name="password" placeholder="Password" /><br>
-  <input type="submit" value="Login" id="button" />
-</form>
-<div>Not registered? <a href="/api/auth/register">get registered</a></div>
+<div id="wrapper">
+  <%- layout("/layouts/boilerplate.ejs") %>
+  <div class="back"><a href="/">Home</a></div>
+  <div id="login" class="form-div">
+    <h3>Login Form</h3>
+    <form class="row g-3 needs-validation" method="post" novalidate>
+      <div class="col-md-12">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div class="col-md-12">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <!-- <input type="submit" value="submit" /> -->
+      <div class="col-12">
+        <button class="btn btn-primary" id="button">Login</button>
+      </div>
+    </form>
+    <div>Not registered? <a href="/api/auth/register">get registered</a></div>
+  </div>
 </div>
