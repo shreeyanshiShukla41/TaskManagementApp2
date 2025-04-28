@@ -193,9 +193,7 @@
   box-shadow: 5px 5px 5px #bebebe, -2px -2px 5px #ffffff;
 }
 
-.accordion-item {
-  width: 500px;
-}
+
 
 .task-form {
   height: 600px;
@@ -298,7 +296,9 @@
 }
 
 #taskAccordion {
-  width: 60%;
+  width: 80%;
+  max-height: 400px;
+  overflow-y: scroll;
 }
 .accordion {
   /* stack overflow */
@@ -307,9 +307,10 @@
 }
 .accordion-item {
   width: 100%;
-  background-color: aliceblue;
+  background-color: white; 
 }
 .accordion-header {
+  background-color: white;
   padding: 10px 40px;
   display: flex;
   align-items: center;
@@ -317,6 +318,7 @@
   cursor: pointer;
 }
 .accordion-content {
+  background-color: white;
   max-height: 0;
   overflow: hidden;
   padding: 0 20px;
@@ -346,4 +348,11 @@
     transparent 75%,
     transparent
   );
+}
+
+#doneBagde{
+  display: none;
+}
+.active{
+  display: inline;
 }

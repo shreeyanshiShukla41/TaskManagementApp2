@@ -5,8 +5,10 @@ const getTasks = async (req, res) => {
   try {
     const { userId } = req.params;
     const user = await User.findById(userId);
-    const tasks = await Task.find({ userId });
-    const completedTasks = await Task.find({ status: "completed" });
+    const tasks = await Task.find({ userId: userId });
+    const completedTasks = await Task.find({
+      $and: [{ userId: userId }, { status: "completed" }],
+    });
     const status = ["pending", "completed", "inprogress"];
     const pending = await Task.countDocuments({
       $and: [{ status: "pending" }, { userId: userId }],
@@ -46,9 +48,6 @@ const setTasks = async (req, res) => {
       natureOfTask,
       userId,
     });
-    // const user = await User.findOne({name});
-    // console.log("user "+user)
-    // newTask.userId = user._id;
     newTask.save();
     if (newTask) {
       res.status(200).redirect(`/api/tasks/${userId}`);
@@ -119,16 +118,24 @@ const countTasks = async (req, res) => {
   }
 };
 
-
-
 const doneStatus = async (req, res) => {
   try {
     const { taskId } = req.params;
-    const task = await Task.find({ taskId });
+    console.log(taskId);
+    const task = await Task.findById(taskId);
+    console.log(task);
+    const userId = task.userId;
 
-    task.status = "completed";
-    task.completedOn = Date.now();
-    console.log("done this task")
+    if (task) {
+      task.status = "completed";
+      task.completedOn = Date.now();
+      await task.save();
+      console.log("done this task");
+      res.redirect(`/api/tasks/${userId}`);
+    } else {
+      console.log("task not found");
+      res.redirect(`/api/tasks/${userId}`);
+    }
   } catch (e) {}
 };
 
@@ -138,5 +145,5 @@ module.exports = {
   editTask,
   deleteTask,
   countTasks,
-  doneStatus
+  doneStatus,
 };

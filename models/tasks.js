@@ -25,6 +25,7 @@ const taskSchema = new mongoose.Schema({
   },
   natureOfTask: {
     type: String,
+    default:"Important",
     required: true,
   },
   status: {

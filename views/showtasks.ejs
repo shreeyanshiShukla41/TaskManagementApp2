@@ -13,7 +13,7 @@
   </div>
   <div id="showtasks">
     <button id="sidebar-cross"></button>
-    <div id="insideShow" style="background-color: rgb(195, 195, 67)">
+    <div id="insideShow" >
       <h2>All Tasks</h2>
       <div style="display: flex; gap: 4px">
         <form action="/api/auth/login" method="get">
@@ -23,7 +23,7 @@
           <button class="bttn">Add a new task</button>
         </form>
       </div>
-      <div class="accordion" id="taskAccordion">
+      <div class="accordion" id="taskAccordion" >
         <% tasks.forEach((task, index) => { %>
         <div
           class="accordion-item"
@@ -34,7 +34,7 @@
             <p><%= index %> &nbsp; <span><%= task.task %></span></p>
             <div style="display: flex; gap: 10px">
               <form method="post" action="/api/tasks/<%= task._id %>/doneTask">
-                <button style="border: none;">
+                <button style="border: none;" id="doneTaskbtn">
                   <i
                     class="fa-solid fa-circle-check"
                     style="font-size: 20px"
@@ -49,12 +49,13 @@
                   <i class="fa-solid fa-trash" style="font-size: 20px"></i>
                 </button>
               </form>
+              <span class="badge text-bg-success" id="doneBagde">Success</span>
             </div>
           </div>
           <div>
             <div class="accordion-content" id="content-<%= index %>">
               <strong>Task Description:</strong> <%= task.description %><br />
-              <strong>Task Due date:</strong> <%= task.DOE.toDateString() %><br />
+              <strong>Task Due date:</strong> <%= new Date(task.DOE).toDateString() %><br />
               <strong>Task is</strong> <%= task.natureOfTask %><br />
               <strong>Task status:</strong><%= task.status %><br />
               <a
@@ -88,8 +89,13 @@
 
     function handleAccordionContent(index) {
       const item = document.getElementById(`item-${index}`);
-      console.log(item);
       item.classList.toggle("active");
     }
+    const doneBagde=document.getElementById("doneBagde");
+    const doneTaskbtn=document.getElementById("doneTaskbtn");
+    doneTaskbtn.addEventListener("click",()=>{
+      doneBagde.classList.add("active");
+    })
+    // console.log(doneBagde)
   </script>
 </div>

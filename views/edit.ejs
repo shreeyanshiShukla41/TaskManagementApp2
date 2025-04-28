@@ -7,6 +7,7 @@
     <form
       method="post"
       action="/api/tasks/updateTask/<%= taskId %>?_method=PUT"
+      class="needs-validation"
     >
       <div>
         <label class="form-label">Task:</label>
@@ -15,11 +16,12 @@
           name="task"
           value="<%= task.task %>"
           class="form-control"
+          required
         />
       </div>
       <div>
         <label class="form-label">Description:</label>
-        <textarea name="description" class="form-control">
+        <textarea name="description" class="form-control" required>
 <%= task.description %></textarea
         >
       </div>
@@ -27,17 +29,18 @@
         <label class="form-label">Date of Start:</label>
         <input class="form-control" type="text" name="DOS" value="<%=
         task.DOS?task.DOS.toISOString().split('T')[0]:"No start date" %>"
+        required
         /><span></span>
       </div>
       <div>
         <label class="form-label">Due Date:</label>
         <input class="form-control" type="text" name="DOE" value="<%=
-        task.DOE?task.DOE.toISOString().split('T')[0]:"No due date" %>"/><span
+        task.DOE?task.DOE.toISOString().split('T')[0]:"No due date" %>" required/><span
         ></span>
       </div>
       <div>
         <label class="form-label">Status:</label>
-        <select name="status" id="status" class="form-control">
+        <select name="status" id="status" class="form-control" required>
           <option id="pending" value="pending">Pending</option>
           <option value="completed">Completed</option>
           <option value="inprogress">Inprogress</option>

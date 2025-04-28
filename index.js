@@ -14,7 +14,7 @@ const ejsMate = require("ejs-mate");
 const port = 8000 || process.env.PORT;
 const { env } = require("process");
 
-const dbUrl = process.env.ATLAS_URL;
+const dbUrl = process.env.ATLAS_URL
 
 main()
   .then((r) => console.log(r))

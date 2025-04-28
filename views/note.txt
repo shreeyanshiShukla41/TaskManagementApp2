@@ -24,3 +24,17 @@
     </div>
   </div>
 </div> -->
+
+
+  <div>
+        <div class="accordion-content" id="ccontent-<%= index %>">
+          <strong>Task Description:</strong> <%= task.description %><br />
+          <strong>Task Due date:</strong> <%= task.DOE.toDateString() %><br />
+          <strong>Task is</strong> <%= task.natureOfTask %><br />
+          <strong>Task status:</strong><%= task.status %><br />
+          <a
+            href="/api/tasks/updateTask/<%= task._id %>"
+            style="text-decoration: none"
+            >Edit Task</a
+          >
+        </div>
