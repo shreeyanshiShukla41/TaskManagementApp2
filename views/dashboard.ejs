@@ -1,0 +1,116 @@
+<%- layout("layouts/boilerplate.ejs") %>
+
+<div style="display: flex">
+  <div class="sidebar-wrap">
+    <div id="sidebar">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/api/auth/register">Register</a></li>
+        <li><a href="/api/auth/login">Login</a></li>
+        <li><a href="/api/tasks/<%= userId %>">All tasks</a></li>
+        <li><a href="/api/dashboard/<%= userId %>">Dashboard</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div
+    style="
+      padding-left:100px;
+      background-color: rgb(156, 207, 239);
+      width: 100%;
+      margin:20px;
+      text-align: center;
+    "
+  >
+    <h1>Dashboard</h1>
+    <input type="hidden" value="<%= countCompletedOnTime %>" id="onTime" />
+    <input type="hidden" value="<%= notCompletedOnTime %>" id="late" />
+    <input type="hidden" value="<%=  weekTaskCompCount %>" id="weeklyCount" />
+    <script>
+      const weekId = "<%= weekId %>";
+    </script>
+    <div style="display: flex; gap: 30px">
+      <div
+        style="
+          width: 400px;
+          border: 2px solid;
+          padding: 10px;
+          text-align: center;
+        "
+      >
+        <h4>Number of tasks completed on time vs tasks completed late</h4>
+        <canvas id="completedChart" width="200px" height="200px"></canvas>
+      </div>
+
+      <div>
+        <div style="border: 1px solid; height: 100px">
+          <h4>
+            Percentage of tasks completed on time:<strong
+              ><%= onTimeCompletionRate %></strong
+            >
+            &#37;
+          </h4>
+        </div>
+        <div style="border: 1px solid; height: 100px">
+          <h4>
+            Average Delay in completion of tasks:<strong>
+              <%= avgDelay %></strong
+            >
+            days
+          </h4>
+        </div>
+
+        <div style="border: 1px solid;margin-top: 10px;">
+          <h3>Number of tasks actually completed per week</h3>
+          <canvas id="weeklyTaskComplStatus"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  const ctx = document.getElementById("completedChart").getContext("2d");
+  const onTime = document.getElementById("onTime").value;
+  const late = document.getElementById("late").value;
+  const d = [onTime, late];
+  const completionStatus = ["Completed on time", "Not completed on time"];
+
+  new Chart(ctx, {
+    type: "doughnut", // Change to 'bar', 'line', etc.
+    data: {
+      labels: completionStatus,
+      datasets: [
+        {
+          label: "Number of tasks",
+          data: d,
+          backgroundColor: ["pink", "green"],
+        },
+      ],
+    },
+  });
+
+  const weeklyCount = document.getElementById("weeklyCount").value;
+  console.log(weekId);
+  console.log(weeklyCount);
+
+  const idArray = weekId.split(",");
+  console.log(idArray);
+
+  const countArray = weeklyCount.split(",");
+
+  const wtc = document.getElementById("weeklyTaskComplStatus");
+  new Chart(wtc, {
+    type: "bar", // Change to 'bar', 'line', etc.
+
+    data: {
+      labels: idArray,
+      datasets: [
+        {
+          label: "Number of tasks",
+          data: countArray,
+          backgroundColor: "red",
+        },
+      ],
+    },
+  });
+</script>

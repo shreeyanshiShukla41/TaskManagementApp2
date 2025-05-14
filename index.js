@@ -9,6 +9,7 @@ const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth");
 const taskRoutes = require("./routes/tasks");
+const dashboardRoutes=require("./routes/dashboard")
 const middleware = require("./middleware");
 const ejsMate = require("ejs-mate");
 const port = 8000 || process.env.PORT;
@@ -40,6 +41,7 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
+app.use("/api/dashboard",dashboardRoutes)
 app.get("/", (req, res) => {
   res.render("home");
 });

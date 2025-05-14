@@ -7,13 +7,13 @@
         <li><a href="/api/auth/register">Register</a></li>
         <li><a href="/api/auth/login">Login</a></li>
         <li><a href="/api/tasks/<%= userId %>">All tasks</a></li>
-        <li>Dashboard</li>
+        <li><a href="/api/dashboard/<%= userId %>">Dashboard</a></li>
       </ul>
     </div>
   </div>
   <div id="showtasks">
     <button id="sidebar-cross"></button>
-    <div id="insideShow" >
+    <div id="insideShow">
       <h2>All Tasks</h2>
       <div style="display: flex; gap: 4px">
         <form action="/api/auth/login" method="get">
@@ -23,7 +23,7 @@
           <button class="bttn">Add a new task</button>
         </form>
       </div>
-      <div class="accordion" id="taskAccordion" >
+      <div class="accordion" id="taskAccordion">
         <% tasks.forEach((task, index) => { %>
         <div
           class="accordion-item"
@@ -34,7 +34,7 @@
             <p><%= index %> &nbsp; <span><%= task.task %></span></p>
             <div style="display: flex; gap: 10px">
               <form method="post" action="/api/tasks/<%= task._id %>/doneTask">
-                <button style="border: none;" id="doneTaskbtn">
+                <button style="border: none" id="doneTaskbtn">
                   <i
                     class="fa-solid fa-circle-check"
                     style="font-size: 20px"
@@ -49,13 +49,18 @@
                   <i class="fa-solid fa-trash" style="font-size: 20px"></i>
                 </button>
               </form>
-              <span class="badge text-bg-success" id="doneBagde">Success</span>
+              <% if(task.status=='completed') {%>
+              <span class="badge text-bg-success" id="doneBagde">Done</span>
+              <% } %> <% if(task.status!=='completed'){ %>
+              <span class="badge text-bg-warning">Not Done</span>
+              <% } %>
             </div>
           </div>
           <div>
             <div class="accordion-content" id="content-<%= index %>">
               <strong>Task Description:</strong> <%= task.description %><br />
-              <strong>Task Due date:</strong> <%= new Date(task.DOE).toDateString() %><br />
+              <strong>Task Due date:</strong> <%= new
+              Date(task.DOE).toDateString() %><br />
               <strong>Task is</strong> <%= task.natureOfTask %><br />
               <strong>Task status:</strong><%= task.status %><br />
               <a
@@ -69,9 +74,11 @@
         <% }) %>
       </div>
     </div>
+    <% if(tasks.length>0) {%>
     <div style="display: flex; flex-direction: column; align-items: center">
       <%- include("taskStatus.ejs") %> <%- include("completed.ejs") %>
     </div>
+    <% } %>
   </div>
 
   <script>
@@ -91,11 +98,5 @@
       const item = document.getElementById(`item-${index}`);
       item.classList.toggle("active");
     }
-    const doneBagde=document.getElementById("doneBagde");
-    const doneTaskbtn=document.getElementById("doneTaskbtn");
-    doneTaskbtn.addEventListener("click",()=>{
-      doneBagde.classList.add("active");
-    })
-    // console.log(doneBagde)
   </script>
 </div>

@@ -123,14 +123,14 @@ const doneStatus = async (req, res) => {
     const { taskId } = req.params;
     console.log(taskId);
     const task = await Task.findById(taskId);
-    console.log(task);
+    
     const userId = task.userId;
 
     if (task) {
       task.status = "completed";
       task.completedOn = Date.now();
       await task.save();
-      console.log("done this task");
+     
       res.redirect(`/api/tasks/${userId}`);
     } else {
       console.log("task not found");

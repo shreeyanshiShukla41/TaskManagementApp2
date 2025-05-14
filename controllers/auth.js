@@ -19,7 +19,6 @@ const register = async (req, res, next) => {
           newUser.save();
           next();
         });
-        console.log(newUser);
 
         return res.redirect("login");
       }
