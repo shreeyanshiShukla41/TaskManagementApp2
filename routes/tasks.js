@@ -19,9 +19,10 @@ router.post("/setTask/:userId", setTasks);
 
 router.get("/updateTask/:taskId", async (req, res) => {
   const { taskId } = req.params;
+  
   const task = await Task.findById(taskId);
-
-  res.render("edit.ejs", { taskId, task });
+  const userId = task.userId;
+  res.render("edit.ejs", { taskId, task, userId });
 });
 router.put("/updateTask/:taskId", editTask);
 
